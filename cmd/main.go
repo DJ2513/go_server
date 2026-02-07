@@ -21,7 +21,7 @@ func main() {
 	http.HandleFunc("GET /health", h.HealthCheckHandler)
 
 	// Server
-	fmt.Printf("Server running! Listening on https://localhost:%v\n\n", port)
+	fmt.Printf("Server running! Listening on http://localhost:%v\n\n", port)
 	if err := http.ListenAndServe(":"+port, nil); err != nil {
 		panic(fmt.Sprintf("Error starting server: %v", err))
 	}
