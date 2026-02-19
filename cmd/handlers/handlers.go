@@ -84,7 +84,7 @@ func (h *Handler) AddTask(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) DeleteTask(w http.ResponseWriter, r *http.Request) {
-	task_id := r.PathValue("taskId")
+	task_id := r.PathValue("task_id")
 	err := h.Repo.DeleteTask(task_id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
