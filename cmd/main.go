@@ -34,11 +34,12 @@ func main() {
 	http.HandleFunc("GET /todos/{id}", h.GetTodoList)
 	http.HandleFunc("DELETE /todos/{id}", h.DeleteTodoList)
 	http.HandleFunc("POST /todos/{id}/tasks", h.AddTask)
-	http.HandleFunc("DELETE /todos/{id}/tasks/{taskId}", h.DeleteTask)
+	http.HandleFunc("DELETE /todos/{id}/tasks/{task_id}", h.DeleteTask)
 
 	// Server
 	fmt.Printf("Server running! Listening on http://localhost:%v\n\n", port)
 	if err := http.ListenAndServe(":"+port, nil); err != nil {
 		panic(fmt.Sprintf("Error starting server: %v", err))
 	}
+
 }
