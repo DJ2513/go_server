@@ -1,8 +1,4 @@
-// package handlers
-
-// Here we have the connection of the routes and the logic
-// something like middleware witout being middleware
-
+// Package handlers is the bridge between the user requests and the db requests.
 package handlers
 
 import (
@@ -61,8 +57,8 @@ func (h *Handler) GetAllTodoList(w http.ResponseWriter, _ *http.Request) {
 }
 
 func (h *Handler) DeleteTodoList(w http.ResponseWriter, r *http.Request) {
-	todo_id := r.PathValue("id")
-	err := h.Repo.DeleteTodoList(todo_id)
+	todoID := r.PathValue("id")
+	err := h.Repo.DeleteTodoList(todoID)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -72,20 +68,20 @@ func (h *Handler) DeleteTodoList(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) AddTask(w http.ResponseWriter, r *http.Request) {
 	var task todo.Task
-	list_id := r.PathValue("id")
+	listID := r.PathValue("id")
 	json.NewDecoder(r.Body).Decode(&task)
-	created_task, err := h.Repo.AddTask(list_id, task)
+	createTask, err := h.Repo.AddTask(listID, task)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(created_task)
+	json.NewEncoder(w).Encode(createTask)
 }
 
 func (h *Handler) DeleteTask(w http.ResponseWriter, r *http.Request) {
-	task_id := r.PathValue("task_id")
-	err := h.Repo.DeleteTask(task_id)
+	taskID := r.PathValue("task_id")
+	err := h.Repo.DeleteTask(taskID)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

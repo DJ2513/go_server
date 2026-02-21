@@ -10,11 +10,11 @@ import (
 func InitDB(filepath string) (*sql.DB, error) {
 	db, err := sql.Open("sqlite", filepath)
 	if err != nil {
-		return nil, fmt.Errorf("Error creating db: %v", err)
+		return nil, fmt.Errorf("error creating db: %v", err)
 	}
 	err = db.Ping()
 	if err != nil {
-		return nil, fmt.Errorf("Error connecting to db: %v", err)
+		return nil, fmt.Errorf("error connecting to db: %v", err)
 	}
 	_, err = db.Exec(`
 		CREATE TABLE IF NOT EXISTS todo_lists(
@@ -32,7 +32,7 @@ func InitDB(filepath string) (*sql.DB, error) {
 		)
 	`)
 	if err != nil {
-		return nil, fmt.Errorf("Error creating tables: %v", err)
+		return nil, fmt.Errorf("error creating tables: %v", err)
 	}
 
 	return db, nil

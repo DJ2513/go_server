@@ -1,3 +1,4 @@
+// Package todo defines the todos structure and methods
 package todo
 
 import (
@@ -8,24 +9,24 @@ import (
 )
 
 type TodoList struct {
-	Id        string    `json:"id"`
+	ID        string    `json:"id"`
 	Title     string    `json:"title"`
 	Tasks     []Task    `json:"tasks"`
 	CreatedAt time.Time `json:"created_at"`
 }
 
 type Task struct {
-	Id          string    `json:"id"`
+	ID          string    `json:"id"`
 	Name        string    `json:"name"`
 	Description string    `json:"description"`
 	CreatedAt   time.Time `json:"created_at"`
 	Done        bool      `json:"done"`
-	Lists_id    string    `json:"-"`
+	ListsID    string    `json:"-"`
 }
 
 func NewTodoList(title string) TodoList {
 	return TodoList{
-		Id:        uuid.New().String(),
+		ID:        uuid.New().String(),
 		Title:     title,
 		Tasks:     make([]Task, 0, 8),
 		CreatedAt: time.Now(),
@@ -35,7 +36,7 @@ func NewTodoList(title string) TodoList {
 func (t *TodoList) AddTask(task Task) error {
 
 	task.CreatedAt = time.Now()
-	task.Id = uuid.New().String()
+	task.ID = uuid.New().String()
 
 	if task.Name == "" {
 		return fmt.Errorf("[ERROR]: Tasks need a name")
@@ -47,9 +48,9 @@ func (t *TodoList) AddTask(task Task) error {
 
 func (t *TodoList) DeleteTask(id string) error {
 	for i := 0; i < len(t.Tasks); i++ {
-		if t.Tasks[i].Id == id {
+		if t.Tasks[i].ID == id {
 			t.Tasks[i] = Task{}
 		}
 	}
-	return fmt.Errorf("[ERROR]: Could not delete task %s.", id)
+	return fmt.Errorf("[ERROR]: Could not delete task %s", id)
 }
